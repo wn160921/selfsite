@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索</title>
+    <style>
+        .container{
+            width: 1000px;
+            margin: 0 auto;
+            overflow: auto;
+        }
+        .container .searchTerm{
+            /*border: #2ac845 2px solid;*/
+            text-align: center;
+            margin: 10px auto;
+        }
+        .container .search{
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+        <table class="searchTerm">
+            <tr>
+                <td>问题标题：</td>
+                <td><input class="question" type="text"/></td>
+            </tr>
+            <!--<tr>-->
+                <!--<td>作者：</td>-->
+                <!--<td><input class="author" type="text"></td>-->
+            <!--</tr>-->
+            <tr>
+                <td>内容</td>
+                <td><input class="content" type="text"></td>
+            </tr>
+            <tr>
+                <td>最小同意数：</td>
+                <td><input class="agreeMin" type="number"></td>
+            </tr>
+            <tr>
+                <td>最大同意数：</td>
+                <td><input class="agreeMax" type="number"></td>
+            </tr>
+        </table>
+
+    <button class="search">搜索</button>
+    <div class="result">
+
+    </div>
+</div>
+<script>
+    $(".search").click(function () {
+        $(".result").empty();
+        $.ajax({
+            url:"/search",
+            data:{
+                question:$(".question").val(),
+                author:$(".author").val(),
+                content:$(".content").val(),
+                agreeMax:$(".agreeMax").val(),
+                agreeMin:$(".agreeMin").val()
+            },
+            success:function (data) {
+                // alert("success");
+                data = $.parseJSON(data);
+                if(data.length==0){
+                    alert("无数据！")
+                }
+                console.log(data[0]);
+                var i = 0;
+                while(i<data.length){
+                    var nodeString = "<div><p>"+data[i].question+"</p>"+"<p>"+data[i].content+"</p>"+"<p>"+data[i].author+"</p>"+"<p>"+data[i].agreeNum+"</p></div><hr/>"
+                    $(".result").append(nodeString);
+                    i+=1
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

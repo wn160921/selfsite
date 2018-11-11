@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3DTest</title>
+
+    <style>
+        .page{
+            perspective: 1800px;
+            transform-style: preserve-3d;
+            /*transform: rotateX(-60deg);*/
+        }
+
+        .stage{
+            position: relative;
+            margin: 200px;
+            width:100px;
+            height:100px;
+            transform-style: preserve-3d;
+            text-align: center;
+            transition: 3s;
+            transform-origin: left;
+        }
+        .stage div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border: #2ac845 2px solid;
+            transition: 1s;
+            /*backface-visibility: hidden;*/
+        }
+        .stage .div1{
+            background: #2ac845;
+            transform: translateZ(-2px) rotateY(180deg);
+        }
+        .stage .div2{
+            background: coral;
+            /*transform: rotateX(60deg) rotateY(60deg) rotateZ(60deg);*/
+        }
+    </style>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="page">
+        <div class="stage">
+            <div class="div1">div1</div>
+            <div class="div2">div2</div>
+        </div>
+        <button class="b1">b1</button>
+        <button class="b2">b2</button>
+    </div>
+    <script>
+        $(".b1").hover(function () {
+            $(".stage").css("transform"," rotateY(180deg)");
+        });
+        $(".b2").hover(function () {
+            $(".stage").css("transform"," rotateY(-180deg)");
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /*定义滚动条轨道*/
+        html::-webkit-scrollbar-track
+        {
+            background-color: #F5F5F5;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.22);
+        }
+        /*定义滚动条高宽及背景*/
+        html::-webkit-scrollbar
+        {
+            width: 5px;
+            background-color: rgba(0, 0, 0, 0.34);
+        }
+        /*定义滚动条*/
+        html::-webkit-scrollbar-thumb
+        {
+            background-color: #8b8b8b;
+            border-radius: 2px;
+        }
+
+        .container .page{
+            width: 100%;
+            min-width: 1200px;
+            min-height: 600px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        .container .page:nth-child(1){
+
+        }
+        .container .page:nth-child(2){
+            background: url("images/bg.jpg") no-repeat;
+            background-size: cover;
+            position: fixed;
+            left: 0;
+            top:0;
+            z-index: -1;
+        }
+
+        .container .page:nth-child(3):before{
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: #66666699;
+            position: absolute;
+            left: 0;
+            top:0;
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        .container .page:nth-child(3) .verticalLine{
+            position: absolute;
+            top: 0;
+            left: 200px;;
+            width:5px;
+            height: 100%;
+            background: #666666;
+        }
+
+        .container .page:nth-child(3) .through{
+            list-style: none;
+            position: absolute;
+            top: 20px;
+            left: 183px;
+            text-align: center;
+        }
+
+        .container .page:nth-child(3) .through li{
+            position: absolute;
+            overflow: hidden;
+            color: whitesmoke;
+        }
+
+        .container .page:nth-child(3) .through li .icon{
+            width: 40px;
+            height: 40px;
+            float: left;
+            /*border-radius: 5px;*/
+            /*border: whitesmoke 1px solid;*/
+        }
+
+        .container .page:nth-child(3) .through li .describe{
+            display: none;
+            width: 300px;
+            margin-left: 40px ;
+            line-height: 40px;
+            /*float: left;*/
+        }
+        .container .page:nth-child(3) .through li:hover .describe{
+            display: block;
+        }
+
+        .container .page:nth-child(3) .through li:nth-child(1) .icon{
+            background: url("images/college.png") no-repeat;
+            background-size: contain;
+        }
+
+        .container .page:nth-child(3) .through li:nth-child(2) .icon{
+            background: url("images/java.png") no-repeat;
+            background-size: contain;
+        }
+
+        .container .page:nth-child(3) .through li:nth-child(3) .icon{
+            background: url("images/android.png") no-repeat;
+            background-size: contain;
+        }
+        .container .page:nth-child(3) .through li:nth-child(4) .icon{
+            background: url("images/server.png") no-repeat;
+            background-size: contain;
+        }
+        .container .page:nth-child(3) .through li:nth-child(5) .icon{
+            background: url("images/ubuntu.png") no-repeat;
+            background-size: contain;
+        }
+
+        .container .page:nth-child(3) .through li:nth-child(6) .icon{
+            background: url("images/python.png") no-repeat;
+            background-size: contain;
+        }
+        .container .page:nth-child(3) .through li:nth-child(7) .icon{
+            background: url("images/learn.png") no-repeat;
+            background-size: contain;
+        }
+
+        .container .page:nth-child(3) .through li:nth-child(8) .icon{
+            background: url("images/front.png") no-repeat;
+            background-size: contain;
+        }
+
+        .container .page:nth-child(3) .through li:nth-child(9) .icon{
+            background: url("images/greens.png") no-repeat;
+            background-size: contain;
+        }
+
+        /*叙述经历*/
+        .container .page:nth-child(3) .saySome{
+            /*border: #2ac845 2px solid;*/
+            position: absolute;
+            left:560px;
+            top: 50%;
+            margin-top: -300px;
+            width: 600px;
+            height: 600px;
+            text-align: center;
+        }
+
+        .container .page:nth-child(3) .saySome div{
+            transform-origin: top;
+            backface-visibility: hidden;
+            transform: rotateX(-120deg);
+        }
+
+        .container .page:nth-child(3) .saySome span{
+            line-height: 60px;
+            font-size: 25px;
+            background: #ffffe099;
+            width: 100%;
+            display: inline-block;
+        }
+
+        @keyframes start {
+            0% {transform: rotateX(-120deg)}
+            25% {transform: rotateX(30deg)}
+            50% {transform: rotateX(-15deg)}
+            75% {transform: rotateX(20deg)}
+            100% {transform: rotateX(0deg)}
+        }
+
+        @keyframes end {
+            0% {transform: rotateX(0deg)}
+            50% {transform: rotateX(60deg)}
+            100% {transform: rotateX(120deg)}
+        }
+        .container .page:nth-child(3) .saySome .open{
+            transform-origin: top;
+            transform: rotateX(0deg);
+            animation: start 1s ease-in;
+        }
+        .container .page:nth-child(3) .saySome .close{
+            transform-origin: top;
+            /*transform: rotateX(0deg);*/
+            animation: end 200ms;
+        }
+
+        .container .page:nth-child(4){
+            position: relative;
+            background: url("images/bg2.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        /*第三页 之前有一个背景页*/
+        .container .page:nth-child(4) .stage{
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            margin-left:-400px ;
+            margin-top:-250px;
+            vertical-align: center;
+            width: 800px;
+            height: 500px;
+            transform-style: preserve-3d;
+            /*border: red 1px solid;*/
+            perspective: 1200px;
+            /*transform: rotateY(180deg);*/
+        }
+
+        #myBook{
+            position: absolute;
+            transform-style: preserve-3d;
+            top: 0;
+            left: 200px;
+            width: 400px;
+            height: 500px;
+            transition: 1s;
+        }
+
+        #myBook .face{
+            box-sizing: content-box;
+            width: 360px;
+            height: 500px;
+            padding-left: 20px;
+            padding-right: 20px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: whitesmoke;
+            /*border: red 5px solid;*/
+            border-radius: 50px;
+            text-align: center;
+            vertical-align: center;
+        }
+        #myBook p{
+            line-height: 40px;
+        }
+        #myBook .paper:nth-child(1) .face:nth-child(1){
+            background: url("images/firstface.png") no-repeat;
+            background-size: cover;
+        }
+
+        #myBook .paper:nth-child(1) .face:nth-child(2) .picContainer{
+            margin: 0 auto;
+            background: url("images/certify1.jpg") no-repeat;
+            background-size: contain;
+            width: 300px;
+            height: 200px;
+        }
+
+        #myBook .paper:nth-child(2) .face:nth-child(1) .picContainer{
+            margin: 0 auto;
+            background: url("images/myapp.png") no-repeat;
+            background-size: contain;
+            width: 255px;
+            height: 450px;
+        }
+
+        #myBook .paper:nth-child(4) .face:nth-child(1) .picContainer:nth-child(1){
+            margin: 30px auto;
+            background: url("images/tree1.png") no-repeat;
+            background-size: contain;
+            width: 255px;
+            height: 200px;
+        }
+
+        #myBook .paper:nth-child(4) .face:nth-child(1) .picContainer:nth-child(2){
+            margin: 5px auto;
+            background: url("images/tree2.png") no-repeat;
+            background-size: contain;
+            width: 255px;
+            height: 200px;
+        }
+
+        #myBook .paper:nth-child(5) .face:nth-child(1) .picContainer{
+            margin: 70px auto;
+            background: url("images/shumo.png") no-repeat;
+            background-size: contain;
+            width: 250px;
+            height: 360px;
+        }
+
+        #myBook .paper:nth-child(5) .face:nth-child(2) .picContainer{
+            margin: 30px auto;
+            margin-bottom: 0;
+            background: url("images/ds1.png") no-repeat;
+            background-size: contain;
+            width: 300px;
+            height: 200px;
+        }
+
+        #myBook .paper:nth-child(6) .face:nth-child(1) .picContainer:nth-child(1){
+            margin: 30px auto;
+            background: url("images/ds2.png") no-repeat;
+            background-size: contain;
+            width: 300px;
+            height: 200px;
+        }
+
+        #myBook .paper:nth-child(6) .face:nth-child(1) .picContainer:nth-child(2){
+             margin: 30px auto;
+             background: url("images/ds3.png") no-repeat;
+             background-size: contain;
+             width: 300px;
+             height: 200px;
+         }
+
+        #myBook .paper{
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 2s;
+            transform-origin: left;
+            width: 400px;
+            height: 500px;
+            transform-style: preserve-3d;
+        }
+
+        #myBook .wait p{
+            line-height: 100px;
+            font-size: 100px;
+            margin-top: 16px;
+            color: #5a6268;
+        }
+
+        .container .page:nth-child(4) .stage .paper:nth-child(1) .face:nth-child(1){
+            background: whitesmoke;
+        }
+        .container .page:nth-child(4) .stage .paper:nth-child(1){
+            transform: translateZ(10px);
+        }
+
+
+        .introduceContainer{
+            position: relative;
+            width: 500px;
+            margin: 100px auto;
+            font-family: "DejaVu Sans Mono";
+            color: whitesmoke;
+        }
+        .introduceContainer *{
+            position: absolute;
+        }
+        .introduceContainer .hphoto{
+            width: 200px;
+            height: 200px;
+            background: url("images/1.png") no-repeat;
+            background-size: cover;
+            border-radius: 100px;
+        }
+        .introduceContainer p{
+            text-align: center;
+            width: 200px;
+        }
+    </style>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <link rel="icon" sizes="any" mask="" href="/images/bitbug_favicon.ico" />
+    <link rel="shortcut icon" href="/images/bitbug_favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <div class="container">
+        <div class="page">
+            <div class="introduceContainer">
+                <div class="hphoto"></div>
+                <p>全菜程序员</p>
+                <p>我叫王宁</p>
+                <p>我希望技术改变世界</p>
+                <p>我天天debug</p>
+            </div>
+        </div>
+        <!--背景页-->
+        <div class="page"></div>
+        <div class="page">
+            <!--先画一条竖线-->
+            <div class="verticalLine"></div>
+            <ul class="through">
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        进入大学
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        愤而学java
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        接着研究android
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        学习java web
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        学习ubuntu
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        人生苦短，我学python
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        接触机器学习
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        开始学习前端
+                    </div>
+                </li>
+                <li>
+                    <div class="icon"></div>
+                    <div class="describe">
+                        加上上课学的C、R、Matlab、Octave，成功加冕“全菜程序猿”
+                    </div>
+                </li>
+            </ul>
+            <div class="saySome">
+                <div>
+                    <span>
+                        我对大学似乎存在巨大的误解
+                    </span>
+                    <div>
+                        <span>手残党玩游戏玩不下去，照着网上教程改改源码</span>
+                        <div>
+                            <span>我要学编程！</span>
+                            <div>
+                                <span>学完java发现啥也干不了</span>
+                                <div>
+                                    <span>学完android发现依然什么也干不了</span>
+                                    <div>
+                                        <span>学完java web发现我缺个服务器</span>
+                                        <div>
+                                            <span>搞完服务器发现android出路似乎比较窄</span>
+                                            <div>
+                                                <span>老师说机器学习有前途</span>
+                                                <div>
+                                                    <span>机器学习原理太难了</span>
+                                                    <div>
+                                                        <span>向全栈工程师前进</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="stage">
+                <div id="myBook">
+                    <!--一个face一个页面，然后用js组装-->
+                    <div class="paper" first="true">
+                        <div class="face">
+                            <!--<p>忠诚</p>-->
+                            <!--<p>博雅</p>-->
+                            <!--<p>朴实</p>-->
+                            <!--<p>刚毅</p>-->
+                            <!--封面1-->
+                        </div>
+                        <!--一面介绍 一面详情-->
+                        <div class="face">
+                            <p>&nbsp;</p>
+                            <p>电子商务三创赛</p>
+                            <p>省级二等奖</p>
+                            <p>主要负责app开发</p>
+                            <p>半成品，几经修改</p>
+                            <div class="picContainer"></div>
+                            <p>所以主要是队友厉害</p>
+                        </div>
+                    </div>
+
+                    <div class="paper">
+                        <div class="face">
+                            <p>&nbsp;</p>
+                            <div class="picContainer"></div>
+                        </div>
+
+                        <div class="face">
+                            <p>&nbsp;</p>
+                            <p>接触机器学习</p>
+                            <p>决策树</p>
+                            <p>关键词提取、LDA</p>
+                            <p>神经网络</p>
+                            <p>做了几个demo</p>
+                            <p>会简单运用</p>
+                            <p>背后原理是……</p>
+                            
+                        </div>
+                    </div>
+
+                    <div class="paper">
+                        <div class="face">
+                            <p>&nbsp;</p>
+                            <a href="http://xiufengcheng.com:5000/s/wordCloudLearn.html" target="_blank">词云demo</a><br>
+                            <a href="http://xiufengcheng.com:5000/s/sim.html" target="_blank">龙门吊</a>
+                        </div>
+
+                        <div class="face">
+                            <!--论文-->
+                            <p>&nbsp;</p>
+                            <p>与学姐合作，</p>
+                            <p>写了一篇关于新兴话题预测的论文，</p>
+                            <p>《数据分析与知识发现》录用</p>
+                            <p>主要负责写bug,改bug,面向论文百度编程</p>
+                            <p>写爬虫爬知乎</p>
+                            <p>问题 答案 讨论 赞同……</p>
+                            <p>用户的几项指标数据</p>
+                            <p>构建决策树</p>
+                            <p>分析</p>
+                        </div>
+                    </div>
+
+                    <div class="paper">
+                        <div class="face">
+                            <div class="picContainer"></div>
+                            <div class="picContainer"></div>
+                        </div>
+                        <div class="face">
+                            <!--数学建模-->
+                            <p>&nbsp;</p>
+                            <p>数模比赛</p>
+                            <p>穆导说重在参与</p>
+                            <p>我就去了</p>
+                            <p>数学水平太差</p>
+                            <p>代码结构也不怎么样</p>
+                            <p>止步校赛</p>
+                        </div>
+                    </div>
+
+                    <div class="paper">
+                        <div class="face">
+                            <div class="picContainer"></div>
+                            <!--图-->
+                        </div>
+
+                        <div class="face">
+                            <!--信息化项目-->
+                            <p>&nbsp;</p>
+                            <p>程秀峰老师的一个项目</p>
+                            <p>负责网站的开发</p>
+                            <p>一个在线的编译环境</p>
+                            <p>虚拟Linux(不太安全稳定)</p>
+                            <div class="picContainer"></div>
+                            <a href="http://xiufengcheng.com:8080/experiment/testhomepage.html">数据结构虚拟在线实验平台</a>
+                        </div>
+                    </div>
+
+                    <div class="paper">
+                        <div class="face">
+                            <div class="picContainer"></div>
+                            <div class="picContainer"></div>
+                            <!--半成品网站链接-->
+                        </div>
+
+                        <div class="face">
+                            <p>&nbsp;</p>
+                            <p><a href="/searchTest.html">尚未完工的搜索引擎</a></p>
+                            <p>用java重新写的爬虫</p>
+                            <p>爬取知乎上的相关内容</p>
+                            <p>使用Lucene7.5框架写搜索引擎</p>
+                            <p>待完善</p>
+                            <!--未完待续-->
+                        </div>
+                    </div>
+
+                    <div class="paper" last="true">
+                        <div class="face">
+                            <p>&nbsp;</p>
+                            <p>C#</p>
+                            <p>信息系统与分析设计</p>
+                            <p>&nbsp;</p>
+                            <p>好好学习</p>
+                            <p>天天向上</p>
+                            <!--本学期的几个东东-->
+                        </div>
+
+                        <div class="face">
+                            <div class="wait">
+                                <p>未</p>
+                                <p>完</p>
+                                <p>待</p>
+                                <p>续</p>
+                            </div>
+                            <!--封面2-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            第四页
+        </div>
+    </div>
+<script>
+    //保持单个展示div高度
+    var pageheight = document.documentElement.clientHeight;
+    var pageWidth = document.documentElement.clientWidth;
+    window.onresize=function (ev) {
+        pageheight = document.documentElement.clientHeight;
+        pageWidth = document.documentElement.clientWidth;
+        if(pageheight<600){
+            pageheight = 600
+        }
+        $(".page").css("height",pageheight);
+
+    }
+    window.onload=function (ev) {
+        pageheight = document.documentElement.clientHeight;
+        pageWidth = document.documentElement.clientWidth;
+        if(pageheight<600){
+            pageheight = 600
+        }
+        $(".page").css("height",pageheight);
+    }
+
+    //保持一次滚动一个div
+    var isScrolling = false;
+    var currentScrollTop = 0;
+    var previousScrollTop = 0;
+    $(window).scroll(function (e) {
+        if(!isScrolling){
+            isScrolling = true;
+            currentScrollTop = $(this).scrollTop();
+            var heightNum = Math.floor(currentScrollTop/pageheight);
+            // console.log("d"+currentScrollTop);
+            // console.log(heightNum);
+            if (currentScrollTop>=previousScrollTop){
+                // console.log(heightNum)
+                if(heightNum==0){
+                    unfoldThrough();
+                }
+                var next = (heightNum+1)*pageheight;
+                $("html,body").animate({scrollTop:next+"px"},500);
+                setTimeout(function () {
+                    isScrolling = false;
+                    previousScrollTop = $(this).scrollTop();
+                },600)
+            }else{
+                console.log(heightNum)
+                if(heightNum==1){
+                    unfoldThrough();
+                }
+                var next = (heightNum)*pageheight;
+                $("html,body").animate({scrollTop:next+"px"},500);
+                setTimeout(function () {
+                    previousScrollTop = $(this).scrollTop();
+                    isScrolling = false;
+                },600)
+            }
+        }
+        e.preventDefault();
+        return false;
+    })
+
+    //写一个函数让容器内的文字晃动
+    function weaveWithMouse(selector) {
+        var baseTop = 30;
+        $(selector+" .introduceContainer").find("*").each(function () {
+            var width = parseInt($(this).css("width"));
+            var height = parseInt($(this).css("height"));
+            $(this).css("left",(250-width/2)+"px");
+            $(this).css("top",baseTop+"px");
+            $(this).attr("baseLeft",(250-width/2)+"px");
+            $(this).attr("baseTop",baseTop+"px");
+            baseTop+=height+10;
+        });
+        var xPosition;
+        var yPosition;
+        $(selector).mouseenter(function (e) {
+            xPosition = e.clientX;
+            yPosition = e.clientY;
+            // console.log("enter");
+        });
+        var x = 0;
+        var y = 0;
+        $(selector).mousemove(function (e) {
+            var moveX = xPosition-e.clientX;
+            var moveY = yPosition-e.clientY;
+            xPosition = e.clientX;
+            yPosition = e.clientY;
+            x += moveX;
+            y += moveY;
+            //console.log(y);
+            $(selector+" .introduceContainer").find("*").each(function () {
+                var left = parseInt($(this).attr("BaseLeft"));
+                var top = parseInt($(this).attr("BaseTop"));
+                // console.log(top+" "+y/1000);
+                var index = $(this).index();
+                $(this).css("left",(left+x/(100-index*10))+"px");
+                $(this).css("top",(top+y/(100-index*10))+"px");
+            })
+            // console.log("---------")
+        });
+    }
+    weaveWithMouse(".container .page:nth-child(1)");
+
+    //让第二个页面动画
+    function unfoldThrough() {
+        $(".container .page:nth-child(3) .through li").css("top",0+"px");
+        $(".container .page:nth-child(3) .through li").each(function () {
+            var space = pageheight/9;
+            var index = $(this).index();
+            $(this).delay(index*100).animate({top:space*index+"px"},100*index);
+            // console.log(index);
+            if(index==8){
+                $(this).find("div").css("line-height","20px");
+            }
+        });
+
+        var timer = null;
+        var i = 0;
+        $(".container .page:nth-child(3) .saySome div").removeClass("open");
+        $(".container .page:nth-child(3) .saySome div").eq(i).addClass("close");
+        timer = setInterval(function () {
+            $(".container .page:nth-child(3) .saySome div").eq(i).removeClass("close");
+            $(".container .page:nth-child(3) .saySome div").eq(i).addClass("open");
+            i++;
+            console.log(i)
+            if(i>9){
+                clearInterval(timer)
+            }
+        },100);
+    }
+
+    
+    //第三个书本页面的成书
+    function toBeBook() {
+        // 一张纸厚1px
+        $("#myBook").find(".paper").each(function () {
+            var baseZ = 10-$(this).index();
+            $(this).find(".face").eq(1).css("transform","rotateY(-180deg) translateZ(1px)");
+            $(this).css("transform","translateZ("+baseZ+"px)");
+            $(this).attr("tz","translateZ("+(baseZ)+"px)");
+            $(this).attr("back","false");
+            $(this).click(function (){
+                if($(this).attr("back")=="false"){
+                    if($(this).attr("first")=="true"){
+
+                        $("#myBook").css("transform","translateX(200px)");
+                    }
+                    if($(this).attr("last")=="true"){
+                        console.log("tttt");
+                        $("#myBook").css("transform","translateX(400px)");
+                    }
+                    $(this).css("transform-orign","left");
+                    $(this).css("transform","rotateY(180deg)");
+                    $(this).attr("back","true");
+                }else {
+                    if($(this).attr("first")=="true"){
+                        $("#myBook").css("transform","translateX(0px)");
+                    }
+                    if($(this).attr("last")=="true"){
+                        console.log("tttt");
+                        $("#myBook").css("transform","translateX(200px)");
+                    }
+                    $(this).css("transform-orign","right");
+                    $(this).css("transform",$(this).attr("tz")+" rotateY(0deg)");
+                    $(this).attr("back","false");
+                }
+                // $(this).css("transform","rotateY(180deg)");
+            });
+        });
+
+    }
+    toBeBook();
+
+
+
+    //
+</script>
+</body>
+</html>
