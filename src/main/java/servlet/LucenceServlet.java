@@ -8,6 +8,7 @@ import org.apache.lucene.document.LongPoint;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
@@ -28,7 +29,6 @@ import java.util.List;
 @WebServlet(name = "LucenceServlet",urlPatterns = "/search")
 public class LucenceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        QueryParser parser = new QueryParser("agreeNum",new SmartChineseAnalyzer());
 //        Query query = LongPoint.newRangeQuery("agreeNum",10000,100000);
 //        Query query = new TermRangeQuery("agreenum",new BytesRef(1),new BytesRef(10000),true,true);
 //        Query query = parser.parse("agreeNum:[10000 TO 100000]");
@@ -39,16 +39,29 @@ public class LucenceServlet extends HttpServlet {
         String agreeMax = request.getParameter("agreeMax");
         List<Query> queryList = new ArrayList<>();
         if(questionKeyword!=null && !"".equals(questionKeyword)){
-            Query qusetionQuery = new TermQuery(new Term("question",questionKeyword));
+//            Query qusetionQuery = new TermQuery(new Term("question",questionKeyword));
+            Query qusetionQuery = null;
+            try {
+                QueryParser parser = new QueryParser("question",new SmartChineseAnalyzer());
+                qusetionQuery = parser.parse(questionKeyword);
+            } catch (ParseException e) {
+                qusetionQuery = new TermQuery(new Term("question",questionKeyword));
+            }
             queryList.add(qusetionQuery);
         }
-        if(authorKeyword!=null && !"".equals(authorKeyword)){
-            Query query = new TermQuery(new Term("author",authorKeyword));
-            queryList.add(query);
-        }
+//        if(authorKeyword!=null && !"".equals(authorKeyword)){
+//            Query query = new TermQuery(new Term("author",authorKeyword));
+//            queryList.add(query);
+//        }
         if(contentKeyword!=null && !"".equals(contentKeyword)){
-            System.out.println(contentKeyword);
-            Query query = new TermQuery(new Term("content",contentKeyword));
+//            System.out.println(contentKeyword);
+//            Query query = new TermQuery(new Term("content",contentKeyword));
+            Query query = null;
+            try {QueryParser parser = new QueryParser("content",new SmartChineseAnalyzer());
+                query = parser.parse(contentKeyword);
+            } catch (ParseException e) {
+                query = new TermQuery(new Term("content",contentKeyword));
+            }
             queryList.add(query);
         }
         if(agreeMin!=null && !agreeMin.equals("") && !"".equals(agreeMax)){
@@ -57,7 +70,7 @@ public class LucenceServlet extends HttpServlet {
         }
         BooleanQuery.Builder builder = new BooleanQuery.Builder();
         for(Query query:queryList){
-            builder.add(query,BooleanClause.Occur.SHOULD);
+            builder.add(query,BooleanClause.Occur.MUST);
         }
         BooleanQuery query = builder.build();
         String path = request.getServletContext().getRealPath("")+"answer_index"+File.separator;

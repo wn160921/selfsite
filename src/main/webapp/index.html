@@ -570,7 +570,7 @@
                             <p>一个在线的编译环境</p>
                             <p>虚拟Linux(不太安全稳定)</p>
                             <div class="picContainer"></div>
-                            <a href="http://xiufengcheng.com:8080/experiment/testhomepage.html">数据结构虚拟在线实验平台</a>
+                            <a href="http://xiufengcheng.com:8080/experiment/testhomepage.html" target="_blank">数据结构虚拟在线实验平台</a>
                         </div>
                     </div>
 
@@ -583,7 +583,7 @@
 
                         <div class="face">
                             <p>&nbsp;</p>
-                            <p><a href="/searchTest.html">尚未完工的搜索引擎</a></p>
+                            <p><a href="./searchTest.html" target="_blank">尚未完工的搜索引擎</a></p>
                             <p>用java重新写的爬虫</p>
                             <p>爬取知乎上的相关内容</p>
                             <p>使用Lucene7.5框架写搜索引擎</p>
@@ -625,6 +625,7 @@
     //保持单个展示div高度
     var pageheight = document.documentElement.clientHeight;
     var pageWidth = document.documentElement.clientWidth;
+    $(".page").css("height",pageheight);
     window.onresize=function (ev) {
         pageheight = document.documentElement.clientHeight;
         pageWidth = document.documentElement.clientWidth;

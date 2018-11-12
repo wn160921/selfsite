@@ -19,7 +19,8 @@
             margin: 0 auto;
         }
     </style>
-
+    <link rel="icon" sizes="any" mask="" href="/images/bitbug_favicon.ico" />
+    <link rel="shortcut icon" href="/images/bitbug_favicon.ico" type="image/x-icon" />
     <script src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -56,7 +57,7 @@
     $(".search").click(function () {
         $(".result").empty();
         $.ajax({
-            url:"/search",
+            url:"./search",
             data:{
                 question:$(".question").val(),
                 author:$(".author").val(),
