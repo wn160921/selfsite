@@ -25,22 +25,36 @@
 </head>
 <body>
 <div class="container">
-        <table class="searchTerm">
+        <table class="searchTerm" >
             <tr>
                 <td>问题标题：</td>
                 <td><input class="question" type="text"/></td>
+                <td>
+                    <select name="" id="questionSelect">
+                        <option value="must">MUST</option>
+                        <option value="should">SHOULD</option>
+                    </select>
+                </td>
             </tr>
-            <!--<tr>-->
-                <!--<td>作者：</td>-->
-                <!--<td><input class="author" type="text"></td>-->
-            <!--</tr>-->
             <tr>
                 <td>内容</td>
                 <td><input class="content" type="text"></td>
+                <td>
+                    <select name="" id="contentSelect">
+                        <option value="must">MUST</option>
+                        <option value="should">SHOULD</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>最小同意数：</td>
                 <td><input class="agreeMin" type="number"></td>
+                <td rowspan="2" align="center">
+                    <select name="" id="agreeSelect">
+                        <option value="must">MUST</option>
+                        <option value="should">SHOULD</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>最大同意数：</td>
@@ -63,7 +77,10 @@
                 author:$(".author").val(),
                 content:$(".content").val(),
                 agreeMax:$(".agreeMax").val(),
-                agreeMin:$(".agreeMin").val()
+                agreeMin:$(".agreeMin").val(),
+                questionSelect:$("#questionSelect").val(),
+                contentSelect:$("#contentSelect").val(),
+                agreeSelect:$("#agreeSelect").val()
             },
             success:function (data) {
                 // alert("success");

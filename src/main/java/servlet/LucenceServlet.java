@@ -33,11 +33,15 @@ public class LucenceServlet extends HttpServlet {
 //        Query query = new TermRangeQuery("agreenum",new BytesRef(1),new BytesRef(10000),true,true);
 //        Query query = parser.parse("agreeNum:[10000 TO 100000]");
         String questionKeyword = request.getParameter("question");
-        String authorKeyword = request.getParameter("author");
+//        String authorKeyword = request.getParameter("author");
         String contentKeyword = request.getParameter("content");
         String agreeMin = request.getParameter("agreeMin");
         String agreeMax = request.getParameter("agreeMax");
-        List<Query> queryList = new ArrayList<>();
+        String questionSelect = request.getParameter("questionSelect");
+        String contentSelect = request.getParameter("contentSelect");
+        String agreeSelect = request.getParameter("agreeSelect");
+        BooleanQuery.Builder builder = new BooleanQuery.Builder();
+
         if(questionKeyword!=null && !"".equals(questionKeyword)){
 //            Query qusetionQuery = new TermQuery(new Term("question",questionKeyword));
             Query qusetionQuery = null;
@@ -47,7 +51,11 @@ public class LucenceServlet extends HttpServlet {
             } catch (ParseException e) {
                 qusetionQuery = new TermQuery(new Term("question",questionKeyword));
             }
-            queryList.add(qusetionQuery);
+            if(questionSelect.equals("should")){
+                builder.add(qusetionQuery, BooleanClause.Occur.SHOULD);
+            }else {
+                builder.add(qusetionQuery, BooleanClause.Occur.MUST);
+            }
         }
 //        if(authorKeyword!=null && !"".equals(authorKeyword)){
 //            Query query = new TermQuery(new Term("author",authorKeyword));
@@ -62,16 +70,23 @@ public class LucenceServlet extends HttpServlet {
             } catch (ParseException e) {
                 query = new TermQuery(new Term("content",contentKeyword));
             }
-            queryList.add(query);
+            if(contentSelect.equals("should")){
+                builder.add(query, BooleanClause.Occur.SHOULD);
+            }else {
+                builder.add(query, BooleanClause.Occur.MUST);
+            }
         }
         if(agreeMin!=null && !agreeMin.equals("") && !"".equals(agreeMax)){
             Query query = LongPoint.newRangeQuery("agreeNum",Integer.parseInt(agreeMin),Integer.parseInt(agreeMax));
-            queryList.add(query);
+            if(agreeSelect.equals("should")){
+                builder.add(query, BooleanClause.Occur.SHOULD);
+            }else {
+                builder.add(query, BooleanClause.Occur.MUST);
+            }
         }
-        BooleanQuery.Builder builder = new BooleanQuery.Builder();
-        for(Query query:queryList){
-            builder.add(query,BooleanClause.Occur.MUST);
-        }
+
+
+
         BooleanQuery query = builder.build();
         String path = request.getServletContext().getRealPath("")+"answer_index"+File.separator;
         System.out.println(path);
